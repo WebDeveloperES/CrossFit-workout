@@ -1,0 +1,1600 @@
+```css
+
+/**
+ * Template Name: corresFit workot
+ * Description: 
+ * Version: 1.1.0
+ * Author: Emamul Sheikh
+ * Author URL: https://webdeveloperes.github.io/Portfolio/
+ */
+
+/* =========================================================
+   CFPA Overlay Builder — Main Workspace Stylesheet
+   ---------------------------------------------------------
+   Sections:
+   01. CSS Variables
+   02. Base & Global Styles
+   03. Application Header
+   04. Workspace Layout
+   05. Control Panel & Heading
+   06. Navigation Tabs
+   07. Settings Sections
+   08. Form Controls
+   09. Timer Controls
+   10. Toggle Switches
+   11. Keyboard Shortcuts
+   12. Branding & File Upload
+   13. Panel Footer
+   14. Preview Area
+   15. Preview Canvas
+   16. Stream Badge
+   17. Overlay Layout & Zones
+   18. Branding Zone
+   19. Timer Zone
+   20. Workout Information Zone
+   21. Canvas Footer
+   22. Preview Caption
+   23. Workflow Cards
+   24. Application Footer
+   25. Animations
+   26. Fullscreen Preview
+   27. Typography Variants
+   28. Responsive Styles
+   ========================================================= */
+
+
+/* =========================================================
+   01. CSS VARIABLES
+   ========================================================= */
+
+:root {
+    --bg: #0d0f10;
+    --panel: #141718;
+    --panel-2: #1a1e1f;
+    --line: #2a3030;
+    --muted: #8c9691;
+    --text: #f4f6f2;
+    --accent: #c7f36b;
+
+    --font-display: "Barlow Condensed", Impact, sans-serif;
+    --font-body: "Inter", Arial, sans-serif;
+}
+
+
+/* =========================================================
+   02. BASE & GLOBAL STYLES
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 13px;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+
+/* =========================================================
+   03. APPLICATION HEADER
+   ========================================================= */
+
+.app-header {
+    position: relative;
+    z-index: 5;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    height: 76px;
+    padding: 0 34px;
+
+    background: #101213;
+    border-bottom: 1px solid #252a29;
+}
+
+/* Brand Logo and Identity */
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    color: var(--text);
+    text-decoration: none;
+}
+
+.brand-mark {
+    display: grid;
+    place-items: center;
+
+    width: 39px;
+    height: 39px;
+
+    border: 2px solid var(--accent);
+
+    color: var(--accent);
+    font: 900 20px var(--font-display);
+
+    transform: skew(-7deg);
+}
+
+.brand-mark span {
+    color: #fff;
+}
+
+.brand-copy {
+    display: flex;
+    flex-direction: column;
+
+    line-height: 1.1;
+    letter-spacing: 1.5px;
+}
+
+.brand-copy strong {
+    font-size: 15px;
+}
+
+.brand-copy small {
+    margin-top: 5px;
+
+    color: var(--muted);
+    font-size: 8px;
+    letter-spacing: 2px;
+}
+
+/* Header Workspace Indicator */
+
+.header-center {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    color: #89918d;
+    font-size: 9px;
+    letter-spacing: 1.8px;
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 12px #c7f36980;
+}
+
+.header-divider {
+    color: #3d4542;
+}
+
+/* Header Actions */
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.save-status {
+    color: #a4aea8;
+    font-size: 10px;
+}
+
+.save-status i {
+    margin-right: 4px;
+    color: var(--accent);
+}
+
+/* Header Buttons */
+
+.btn-outline-light {
+    border-color: #414846;
+    color: #e5e9e5;
+}
+
+.btn-outline-light:hover {
+    background: #fff;
+    color: #111;
+}
+
+.btn-sm {
+    padding: 9px 13px;
+
+    font-size: 10px;
+    letter-spacing: 0.3px;
+}
+
+.btn-icon {
+    margin-right: 5px;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   04. WORKSPACE LAYOUT
+   ========================================================= */
+
+.workspace {
+    display: grid;
+    grid-template-columns: 340px minmax(0, 1fr);
+
+    max-width: none;
+    min-height: calc(100vh - 76px);
+    padding: 0;
+}
+
+
+/* =========================================================
+   05. CONTROL PANEL & HEADING
+   ========================================================= */
+
+.control-panel {
+    display: flex;
+    flex-direction: column;
+
+    padding: 29px 25px 20px;
+
+    background: var(--panel);
+    border-right: 1px solid #252a29;
+}
+
+.panel-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+/* Reusable Section Eyebrow */
+
+.eyebrow {
+    margin: 0 0 11px;
+
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.2px;
+}
+
+/* Main Panel Heading */
+
+.panel-heading h1 {
+    margin: 0;
+
+    font: 800 34px / 0.92 var(--font-display);
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+}
+
+.panel-heading h1 em {
+    color: var(--accent);
+    font-style: normal;
+}
+
+/* Version Indicator */
+
+.version-pill {
+    padding: 5px 6px;
+
+    border: 1px solid #343a36;
+    border-radius: 3px;
+
+    color: #8b958e;
+    font-size: 8px;
+    letter-spacing: 1px;
+}
+
+/* Panel Introduction */
+
+.panel-intro {
+    max-width: 250px;
+    margin: 17px 0 23px;
+
+    color: #8d9690;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   06. NAVIGATION TABS
+   ========================================================= */
+
+.control-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+
+    margin-bottom: 23px;
+    padding: 4px;
+
+    background: #0f1112;
+    border: 1px solid #272c2b;
+    border-radius: 5px;
+}
+
+.control-tab {
+    padding: 10px 4px;
+
+    background: transparent;
+    border: 0;
+    border-radius: 3px;
+
+    color: #727c76;
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.control-tab span {
+    margin-left: 5px;
+    font-weight: 700;
+}
+
+.control-tab.active {
+    background: #252b27;
+    color: var(--accent);
+}
+
+
+/* =========================================================
+   07. SETTINGS SECTIONS
+   ========================================================= */
+
+.settings-section {
+    display: none;
+}
+
+.settings-section.active {
+    display: block;
+    animation: fadeIn 0.2s ease;
+}
+
+/* Section Heading and Icon */
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-bottom: 21px;
+}
+
+.section-icon {
+    display: grid;
+    place-items: center;
+
+    width: 35px;
+    height: 35px;
+
+    border: 1px solid #3b4538;
+    border-radius: 4px;
+
+    color: var(--accent);
+    font-size: 19px;
+}
+
+.section-title h2 {
+    margin: 0 0 4px;
+
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+}
+
+.section-title p {
+    margin: 0;
+
+    color: #808b84;
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   08. FORM CONTROLS
+   ========================================================= */
+
+/* Labels */
+
+.form-label,
+.field-label-row label {
+    margin-bottom: 8px;
+
+    color: #aeb6b0;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.form-label {
+    display: block;
+}
+
+/* Inputs and Selects */
+
+.form-control,
+.form-select {
+    min-height: 39px;
+    padding: 10px 12px;
+
+    background: #0f1212;
+    border: 1px solid #303735;
+    border-radius: 4px;
+
+    color: #f1f4ef;
+    font-size: 11px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background: #111514;
+    border-color: var(--accent);
+
+    color: #fff;
+    box-shadow: 0 0 0 2px #c7f36b20;
+}
+
+.form-select {
+    color-scheme: dark;
+}
+
+/* Field Label Row */
+
+.field-label-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 2px;
+}
+
+.mini-label {
+    color: var(--accent);
+    font-size: 8px;
+    letter-spacing: 1px;
+}
+
+/* Value Indicator */
+
+.value-chip {
+    padding: 5px 8px;
+
+    background: #252c20;
+    border-radius: 3px;
+
+    color: var(--accent);
+    font-size: 9px;
+}
+
+/* Range Input */
+
+.accent-range {
+    margin: 4px 0 14px;
+    accent-color: var(--accent);
+}
+
+
+/* =========================================================
+   09. TIMER CONTROLS
+   ========================================================= */
+
+.timer-buttons {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr 1fr;
+    gap: 7px;
+
+    margin-top: 18px;
+}
+
+/* General Button Styles */
+
+.btn {
+    border-radius: 4px;
+    font-weight: 700;
+}
+
+/* Primary Accent Button */
+
+.btn-accent {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #111;
+}
+
+.btn-accent:hover {
+    background: #d7ff8b;
+    border-color: #d7ff8b;
+}
+
+/* Secondary Button */
+
+.btn-soft {
+    background: #252a29;
+    border: 1px solid #363d39;
+    color: #e3e8e2;
+}
+
+.btn-soft:hover {
+    background: #303733;
+    border-color: #59645c;
+    color: #fff;
+}
+
+/* Timer Button Sizing */
+
+.timer-buttons .btn {
+    padding: 11px 7px;
+    font-size: 10px;
+}
+
+.timer-buttons .btn span {
+    margin-left: 4px;
+}
+
+.btn-reset {
+    color: #aab3ac;
+}
+
+
+/* =========================================================
+   10. TOGGLE SWITCHES
+   ========================================================= */
+
+.toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 3px;
+    padding: 15px 0;
+
+    border-bottom: 1px solid #292f2d;
+}
+
+.toggle-row strong {
+    display: block;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.toggle-row small {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #7f8982;
+    font-size: 9px;
+}
+
+/* Switch Container */
+
+.switch {
+    position: relative;
+
+    display: inline-block;
+    flex-shrink: 0;
+
+    width: 32px;
+    height: 18px;
+}
+
+.switch input {
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+
+/* Switch Track */
+
+.switch span {
+    position: absolute;
+    inset: 0;
+
+    background: #3a413d;
+    border-radius: 20px;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* Switch Thumb */
+
+.switch span:before {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+
+    width: 12px;
+    height: 12px;
+
+    background: #a0aaa2;
+    border-radius: 50%;
+
+    content: "";
+    transition: 0.2s;
+}
+
+/* Active Switch State */
+
+.switch input:checked + span {
+    background: #506c2f;
+}
+
+.switch input:checked + span:before {
+    background: var(--accent);
+    transform: translateX(14px);
+}
+
+
+/* =========================================================
+   11. KEYBOARD SHORTCUTS
+   ========================================================= */
+
+.keyboard-note {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    margin-top: 17px;
+
+    color: #737d76;
+    font-size: 9px;
+}
+
+.keyboard-note kbd {
+    padding: 3px 5px;
+
+    background: #272d29;
+    border: 1px solid #3b433d;
+    border-radius: 3px;
+
+    color: #cbd4cd;
+    font-size: 9px;
+}
+
+.keyboard-note span {
+    color: #3e4741;
+}
+
+
+/* =========================================================
+   12. BRANDING & FILE UPLOAD
+   ========================================================= */
+
+.file-input {
+    padding: 7px;
+    font-size: 10px;
+}
+
+.file-input::file-selector-button {
+    margin-right: 8px;
+    padding: 5px 8px;
+
+    background: #292f2b;
+    border: 0;
+    border-radius: 3px;
+
+    color: #e5ebe5;
+    font-size: 9px;
+}
+
+.logo-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 9px;
+}
+
+.hint-text {
+    color: #778179;
+    font-size: 9px;
+}
+
+.color-input {
+    height: 39px;
+    padding: 4px;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   13. CONTROL PANEL FOOTER
+   ========================================================= */
+
+.panel-footer {
+    margin-top: auto;
+    padding-top: 25px;
+}
+
+.panel-footer .btn {
+    padding: 12px;
+
+    font-size: 10px;
+    letter-spacing: 0.4px;
+}
+
+.panel-footer p {
+    margin: 10px 0 0;
+
+    color: #6f7972;
+    font-size: 9px;
+    text-align: center;
+}
+
+
+/* =========================================================
+   14. PREVIEW AREA
+   ========================================================= */
+
+.preview-area {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+    padding: 34px clamp(20px, 4vw, 62px) 22px;
+}
+
+/* Preview Header */
+
+.preview-topbar {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    margin-bottom: 24px;
+}
+
+.preview-topbar .eyebrow {
+    margin-bottom: 7px;
+}
+
+.preview-topbar h2 {
+    margin: 0;
+
+    font: 700 24px var(--font-display);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* Preview Tools */
+
+.preview-tools {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.preview-status {
+    color: #9da79f;
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.preview-status i,
+.caption-dot {
+    display: inline-block;
+
+    width: 6px;
+    height: 6px;
+    margin-right: 7px;
+
+    background: var(--accent);
+    border-radius: 50%;
+}
+
+/* Icon Button */
+
+.icon-button {
+    width: 34px;
+    height: 34px;
+
+    background: #191d1c;
+    border: 1px solid #343b37;
+    border-radius: 4px;
+
+    color: #cdd4ce;
+    font-size: 19px;
+}
+
+
+/* =========================================================
+   15. PREVIEW CANVAS
+   ========================================================= */
+
+/* Canvas Container */
+
+.preview-canvas-wrap {
+    position: relative;
+
+    padding: 15px;
+
+    background: #141718;
+    border: 1px solid #2b302e;
+    border-radius: 5px;
+}
+
+/* Canvas Metadata */
+
+.canvas-meta {
+    display: flex;
+    justify-content: space-between;
+
+    margin: 0 0 12px;
+
+    color: #68736c;
+    font-size: 8px;
+    letter-spacing: 1.4px;
+}
+
+.canvas-meta b {
+    margin-left: 6px;
+
+    color: #c3ccc4;
+    font-weight: 700;
+}
+
+/* Main 16:9 Canvas */
+
+.preview-canvas {
+    position: relative;
+    isolation: isolate;
+
+    overflow: hidden;
+
+    aspect-ratio: 16 / 9;
+
+    background: #1a1e1d;
+    border-radius: 2px;
+}
+
+/* Gym Background Image */
+
+.gym-background {
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(10, 14, 13, 0.86),
+            rgba(10, 14, 13, 0.38) 52%,
+            rgba(10, 14, 13, 0.82)
+        ),
+        url("https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1920&q=85");
+
+    background-position: center;
+    background-size: cover;
+
+    filter: saturate(0.55);
+}
+
+/* Canvas Vignette */
+
+.preview-vignette {
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.66),
+        transparent 35%,
+        transparent 65%,
+        rgba(0, 0, 0, 0.35)
+    );
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   16. STREAM BADGE
+   ========================================================= */
+
+.stream-badge {
+    position: absolute;
+    top: 5.2%;
+    left: 3.5%;
+
+    padding: 0.8em 1.1em;
+
+    background: #101413bb;
+    border: 1px solid #ffffff24;
+    border-radius: 2px;
+
+    font-size: clamp(5px, 0.65vw, 9px);
+    font-weight: 800;
+    letter-spacing: 1.4px;
+}
+
+/* Live Indicator */
+
+.live-pulse {
+    display: inline-block;
+
+    width: 0.55em;
+    height: 0.55em;
+    margin-right: 0.65em;
+
+    background: #ff554d;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #ff554d;
+}
+
+
+/* =========================================================
+   17. OVERLAY LAYOUT & ZONES
+   ========================================================= */
+
+.overlay-layout {
+    position: absolute;
+    right: 3.5%;
+    bottom: 10%;
+    left: 3.5%;
+
+    display: grid;
+    grid-template-columns: 1fr 1.25fr 1fr;
+    align-items: center;
+    gap: 3%;
+}
+
+.overlay-zone {
+    min-width: 0;
+
+    text-shadow: 0 2px 14px #000b;
+}
+
+
+/* =========================================================
+   18. BRANDING ZONE — LEFT
+   ========================================================= */
+
+.overlay-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Logo Container */
+
+.logo-box {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+
+    width: clamp(30px, 5vw, 76px);
+    aspect-ratio: 1;
+
+    border: 2px solid var(--accent);
+
+    color: #fff;
+    font: 900 clamp(15px, 2.2vw, 34px) var(--font-display);
+
+    transform: skew(-5deg);
+}
+
+.logo-box span {
+    color: var(--accent);
+}
+
+.logo-box img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+/* Brand Title */
+
+.brand-title {
+    color: #fff;
+
+    font: 800 clamp(8px, 1.15vw, 17px) / 1 var(--font-display);
+    letter-spacing: 0.6px;
+}
+
+.brand-subtitle {
+    margin-top: 7px;
+
+    color: var(--accent);
+    font-size: clamp(4px, 0.45vw, 7px);
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   19. TIMER ZONE — CENTER
+   ========================================================= */
+
+.overlay-center {
+    padding: 0 5%;
+
+    border-right: 1px solid #ffffff25;
+    border-left: 1px solid #ffffff25;
+
+    text-align: center;
+}
+
+/* Timer Heading */
+
+.timer-kicker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    color: #e0e5dd;
+    font-size: clamp(4px, 0.5vw, 8px);
+    font-weight: 800;
+    letter-spacing: 1.3px;
+}
+
+.timer-line {
+    width: 13%;
+    max-width: 25px;
+    height: 1px;
+
+    background: var(--accent);
+}
+
+/* Main Timer Display */
+
+.preview-timer {
+    margin: 8px 0;
+
+    color: var(--accent);
+    font: 900 clamp(33px, 6.8vw, 104px) / 0.95 var(--font-display);
+    letter-spacing: 1px;
+    text-shadow: 0 0 25px #0008;
+}
+
+/* Timer Status and Round */
+
+.timer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    font-size: clamp(4px, 0.52vw, 8px);
+    font-weight: 800;
+    letter-spacing: 0.8px;
+}
+
+.timer-state {
+    color: #fff;
+}
+
+.round-display {
+    color: var(--accent);
+}
+
+
+/* =========================================================
+   20. WORKOUT INFORMATION ZONE — RIGHT
+   ========================================================= */
+
+.overlay-right {
+    padding-left: 3%;
+
+    border-left: 2px solid var(--accent);
+}
+
+/* Workout Label */
+
+.wod-label {
+    display: block;
+
+    color: var(--accent);
+    font-size: clamp(4px, 0.47vw, 7px);
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+/* Workout Title */
+
+.wod-title {
+    display: block;
+
+    margin: 5px 0 8px;
+
+    color: #fff;
+    font: 800 clamp(11px, 1.6vw, 25px) / 1.05 var(--font-display);
+}
+
+/* Decorative Divider */
+
+.wod-rule {
+    width: 24px;
+    height: 2px;
+    margin: 8px 0;
+
+    background: var(--accent);
+}
+
+/* Coach Information */
+
+.coach-row {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.coach-avatar {
+    display: grid;
+    place-items: center;
+
+    width: clamp(15px, 2vw, 28px);
+    height: clamp(15px, 2vw, 28px);
+
+    border: 1px solid var(--accent);
+
+    color: var(--accent);
+    font-size: clamp(7px, 0.8vw, 12px);
+    font-weight: 800;
+}
+
+.coach-row small {
+    display: block;
+
+    color: #9ca69d;
+    font-size: clamp(4px, 0.4vw, 6px);
+    letter-spacing: 1px;
+}
+
+.coach-row strong {
+    display: block;
+
+    margin-top: 3px;
+    font-size: clamp(6px, 0.65vw, 10px);
+}
+
+/* Workout Description */
+
+.wod-info {
+    max-width: 220px;
+    margin: 9px 0 0;
+
+    color: #c4ccc4;
+    font-size: clamp(4px, 0.5vw, 8px);
+    line-height: 1.5;
+}
+
+/* Live Clock */
+
+.live-clock {
+    margin-top: 9px;
+
+    color: var(--accent);
+    font-size: clamp(5px, 0.6vw, 9px);
+    letter-spacing: 1.5px;
+}
+
+
+/* =========================================================
+   21. CANVAS FOOTER
+   ========================================================= */
+
+.canvas-bottom {
+    position: absolute;
+    right: 3.5%;
+    bottom: 3.2%;
+    left: 3.5%;
+
+    display: flex;
+    justify-content: space-between;
+
+    color: #a6afa7;
+    font-size: clamp(4px, 0.45vw, 7px);
+    letter-spacing: 1.2px;
+}
+
+.canvas-bottom b {
+    color: #fff;
+}
+
+
+/* =========================================================
+   22. PREVIEW CAPTION
+   ========================================================= */
+
+.preview-caption {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 13px 2px 0;
+
+    color: #78837b;
+    font-size: 9px;
+    letter-spacing: 0.4px;
+}
+
+.preview-caption .caption-dot {
+    width: 5px;
+    height: 5px;
+}
+
+
+/* =========================================================
+   23. WORKFLOW CARDS
+   ========================================================= */
+
+.below-preview {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+
+    margin-top: 27px;
+}
+
+/* Workflow Card */
+
+.workflow-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+
+    min-width: 0;
+    padding: 15px 13px;
+
+    background: #141718;
+    border: 1px solid #292f2c;
+}
+
+.workflow-number {
+    color: var(--accent);
+    font: 700 18px var(--font-display);
+}
+
+.workflow-card strong {
+    font-size: 10px;
+}
+
+.workflow-card p {
+    margin: 6px 0 0;
+
+    color: #7e8981;
+    font-size: 9px;
+    line-height: 1.6;
+}
+
+.workflow-card > span {
+    margin-left: auto;
+    color: #7b877e;
+}
+
+
+/* =========================================================
+   24. APPLICATION FOOTER
+   ========================================================= */
+
+.app-footer {
+    display: flex;
+    justify-content: space-between;
+
+    margin-top: auto;
+    padding-top: 24px;
+
+    border-top: 1px solid #242a27;
+
+    color: #647067;
+    font-size: 8px;
+    letter-spacing: 1.1px;
+}
+
+.app-footer b {
+    color: #a1aca2;
+}
+
+
+/* =========================================================
+   25. ANIMATIONS
+   ========================================================= */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(3px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   26. FULLSCREEN PREVIEW
+   ========================================================= */
+
+.preview-canvas.is-fullscreen {
+    position: fixed;
+    inset: 4vh 4vw;
+    z-index: 99;
+
+    aspect-ratio: auto;
+
+    box-shadow: 0 0 0 100vmax #050606ed;
+}
+
+/* Fullscreen Exit Hint */
+
+body.preview-fullscreen:after {
+    position: fixed;
+    top: 1vh;
+    right: 4vw;
+    z-index: 100;
+
+    color: #fff;
+    font-size: 11px;
+
+    content: "ESC zum Schließen";
+}
+
+
+/* =========================================================
+   27. TYPOGRAPHY VARIANTS
+   ========================================================= */
+
+.font-compact .brand-title {
+    font-size: clamp(7px, 0.95vw, 14px);
+}
+
+.font-large .brand-title {
+    font-size: clamp(9px, 1.35vw, 20px);
+}
+
+
+/* =========================================================
+   28. RESPONSIVE STYLES
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   28.1. Medium Screens — Tablets and Small Laptops
+   --------------------------------------------------------- */
+
+@media (max-width: 1100px) {
+    .workspace {
+        grid-template-columns: 310px minmax(0, 1fr);
+    }
+
+    .control-panel {
+        padding: 25px 20px;
+    }
+
+    .preview-area {
+        padding: 28px 22px;
+    }
+
+    .header-center {
+        display: none;
+    }
+
+    .below-preview {
+        grid-template-columns: 1fr;
+    }
+
+    .workflow-card {
+        padding: 12px;
+    }
+
+    .preview-timer {
+        font-size: clamp(30px, 6vw, 80px);
+    }
+}
+
+
+/* ---------------------------------------------------------
+   28.2. Mobile Screens — Tablets and Smartphones
+   --------------------------------------------------------- */
+
+@media (max-width: 760px) {
+    /* Header */
+
+    .app-header {
+        min-height: 68px;
+        height: auto;
+        padding: 14px 17px;
+        gap: 12px;
+    }
+
+    .header-actions {
+        gap: 8px;
+    }
+
+    .save-status {
+        display: none;
+    }
+
+    .brand-mark {
+        width: 34px;
+        height: 34px;
+    }
+
+    .brand-copy strong {
+        font-size: 13px;
+    }
+
+    /* Main Workspace */
+
+    .workspace {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Control Panel */
+
+    .control-panel {
+        padding: 22px 18px;
+
+        border-right: 0;
+        border-bottom: 1px solid #2a302d;
+    }
+
+    .panel-heading h1 {
+        font-size: 30px;
+    }
+
+    .panel-intro {
+        max-width: none;
+    }
+
+    .panel-footer {
+        margin-top: 22px;
+    }
+
+    /* Preview Area */
+
+    .preview-area {
+        padding: 25px 14px;
+    }
+
+    .preview-topbar {
+        margin-bottom: 17px;
+    }
+
+    .preview-topbar h2 {
+        font-size: 21px;
+    }
+
+    .preview-canvas-wrap {
+        padding: 8px;
+    }
+
+    /* Preview Caption */
+
+    .preview-caption {
+        gap: 12px;
+        font-size: 8px;
+    }
+
+    /* Overlay Layout */
+
+    .overlay-layout {
+        right: 2.5%;
+        bottom: 11%;
+        left: 2.5%;
+        gap: 2%;
+    }
+
+    .overlay-left {
+        gap: 5px;
+    }
+
+    .overlay-center {
+        padding: 0 2%;
+    }
+
+    .timer-bottom {
+        gap: 5px;
+    }
+
+    .overlay-right {
+        padding-left: 2%;
+    }
+
+    .canvas-bottom {
+        right: 2.5%;
+        left: 2.5%;
+    }
+
+    /* Workflow Cards */
+
+    .below-preview {
+        margin-top: 20px;
+    }
+
+    /* Footer */
+
+    .app-footer {
+        flex-wrap: wrap;
+        gap: 15px;
+        line-height: 1.7;
+    }
+
+    /* Stream Badge */
+
+    .stream-badge {
+        top: 4%;
+        left: 2.5%;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   28.3. Small Mobile Screens
+   --------------------------------------------------------- */
+
+@media (max-width: 420px) {
+    /* Header */
+
+    .header-actions .btn {
+        padding: 8px;
+        font-size: 9px;
+    }
+
+    .brand-copy small {
+        font-size: 7px;
+    }
+
+    /* Preview Header */
+
+    .preview-status {
+        display: none;
+    }
+
+    /* Overlay Layout */
+
+    .overlay-layout {
+        grid-template-columns: 0.9fr 1.15fr 0.9fr;
+    }
+
+    /* Branding */
+
+    .brand-subtitle {
+        margin-top: 3px;
+    }
+
+    /* Timer */
+
+    .preview-timer {
+        margin: 5px 0;
+    }
+
+    .timer-kicker {
+        letter-spacing: 0.5px;
+    }
+
+    .timer-bottom {
+        letter-spacing: 0;
+    }
+
+    /* Workout Information */
+
+    .wod-info {
+        margin-top: 5px;
+    }
+
+    .live-clock {
+        margin-top: 4px;
+    }
+}
+
+
+/* =========================================================
+   END OF CFPA OVERLAY BUILDER STYLESHEET
+   ========================================================= */
+```

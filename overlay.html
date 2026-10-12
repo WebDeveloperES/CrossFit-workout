@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Transparente CrossFit-Overlay-Ansicht für OBS Browser Source.">
+  <title>CFPA — Transparent Overlay</title>
+  <link rel="stylesheet" href="css/overlay.css">
+</head>
+<body>
+  <!-- The overlay is intentionally transparent; add overlay.html as a local OBS Browser Source. -->
+  <main class="overlay-stage" id="overlayStage">
+    <section class="zone left-zone" id="outLeft">
+      <div class="logo"><img id="outLogo" alt="" hidden><span id="outDefaultLogo">CF<span>+</span></span></div>
+      <div class="brand"><strong id="outBrandTitle">CFPA TRAINING CLUB</strong><small id="outBrandSubtitle">STRENGTH • COMMUNITY • PROGRESS</small></div>
+    </section>
+    <section class="zone center-zone" id="outCenter">
+      <div class="kicker"><span></span> WORKOUT IN PROGRESS <span></span></div>
+      <div class="timer" id="outTimer">12:00</div>
+      <div class="timer-meta"><span id="outState">READY TO START</span><b id="outRound">ROUND 01 / 05</b></div>
+    </section>
+    <section class="zone right-zone" id="outRight">
+      <small class="wod-label">TODAY'S WORKOUT</small>
+      <strong class="wod-title" id="outWorkoutTitle">ENGINE ROOM</strong>
+      <div class="rule"></div>
+      <div class="coach"><span>A</span><div><small>HEAD COACH</small><b id="outCoach">COACH ALEX</b></div></div>
+      <p id="outInfo">5 ROUNDS · QUALITY OVER SPEED</p>
+      <time id="outClock">00:00:00</time>
+    </section>
+  </main>
+  <script src="js/overlay.js"></script>
+</body>
+</html>

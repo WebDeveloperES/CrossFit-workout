@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Individuelles CrossFit-Streaming-Overlay mit Timer, drei Informationszonen und OBS-freundlicher transparenter Overlay-Ansicht.">
+    <title>CFPA — CrossFit Stream Overlay</title>
+    <!-- Bootstrap 5: responsive layout and utility classes -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts: optional typography enhancement -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+  <body>
+    <!-- App header -->
+    <header class="app-header">
+      <a class="brand" href="#" aria-label="CFPA Overlay Startseite">
+        <span class="brand-mark">C<span>F</span></span>
+        <span class="brand-copy"><strong>CFPA</strong><small>STREAM CONTROL</small></span>
+      </a>
+      <div class="header-center"><span class="status-dot"></span> LOCAL WORKSPACE <span class="header-divider">/</span> OVERLAY BUILDER</div>
+      <div class="header-actions">
+        <span class="save-status"><i class="bi bi-check2-circle"></i> <span id="saveStatus">Bereit</span></span>
+        <button class="btn btn-outline-light btn-sm" id="openOverlayBtn" type="button"><span class="btn-icon">↗</span> Overlay öffnen</button>
+      </div>
+    </header>
+
+    <!-- Main workspace: controls on the left, preview on the right -->
+    <main class="workspace container-fluid">
+      <aside class="control-panel">
+        <div class="panel-heading">
+          <div><p class="eyebrow">KONTROLLZENTRUM</p><h1>Dein Stream.<br><em>Dein Setup.</em></h1></div>
+          <span class="version-pill">BETA 1.0</span>
+        </div>
+        <p class="panel-intro">Passe dein Workout-Overlay an und sieh Änderungen direkt in der Vorschau.</p>
+
+        <!-- Primary navigation for control categories -->
+        <nav class="control-tabs" aria-label="Overlay Einstellungen">
+          <button class="control-tab active" data-tab="timer" type="button">01 <span>Timer</span></button>
+          <button class="control-tab" data-tab="branding" type="button">02 <span>Branding</span></button>
+          <button class="control-tab" data-tab="details" type="button">03 <span>Infos</span></button>
+        </nav>
+
+        <!-- Timer settings section -->
+        <section class="settings-section tab-content-panel active" id="tab-timer">
+          <div class="section-title"><span class="section-icon">◷</span><div><h2>Timer-Steuerung</h2><p>Modus, Dauer und Intervall</p></div></div>
+          <div class="field-label-row"><label for="timerMode">Timer-Modus</label><span class="mini-label">LIVE PREVIEW</span></div>
+          <select class="form-select custom-select" id="timerMode">
+            <option value="countdown">Countdown</option>
+            <option value="stopwatch">Stoppuhr</option>
+            <option value="interval">Intervall (Demo)</option>
+          </select>
+          <div class="row g-3 mt-1">
+            <div class="col-6"><label class="form-label" for="durationMinutes">Minuten</label><input class="form-control" id="durationMinutes" type="number" min="0" max="999" value="12"></div>
+            <div class="col-6"><label class="form-label" for="durationSeconds">Sekunden</label><input class="form-control" id="durationSeconds" type="number" min="0" max="59" value="0"></div>
+          </div>
+          <div class="timer-buttons">
+            <button class="btn btn-accent" id="startBtn" type="button">▶ <span>Start</span></button>
+            <button class="btn btn-soft" id="pauseBtn" type="button">Ⅱ <span>Pause</span></button>
+            <button class="btn btn-soft btn-reset" id="resetBtn" type="button">↺ <span>Reset</span></button>
+          </div>
+          <div class="field-label-row mt-4"><label for="roundCount">Runden</label><span id="roundValue" class="value-chip">5 Runden</span></div>
+          <input class="form-range accent-range" id="roundCount" type="range" min="1" max="20" value="5">
+          <div class="row g-3">
+            <div class="col-6"><label class="form-label" for="workTime">Arbeit (Sek.)</label><input class="form-control" id="workTime" type="number" min="1" value="40"></div>
+            <div class="col-6"><label class="form-label" for="restTime">Pause (Sek.)</label><input class="form-control" id="restTime" type="number" min="0" value="20"></div>
+          </div>
+          <div class="toggle-row"><div><strong>Timer-Farbverlauf</strong><small>Grün → Gelb → Rot</small></div><label class="switch"><input type="checkbox" id="colorShift" checked><span></span></label></div>
+          <div class="toggle-row"><div><strong>Signalton</strong><small>Bei Timer-Ende (Browser-Audio)</small></div><label class="switch"><input type="checkbox" id="soundToggle"><span></span></label></div>
+          <div class="keyboard-note"><kbd>Space</kbd> Start / Pause <span>·</span> <kbd>R</kbd> Reset</div>
+        </section>
+
+        <!-- Branding and left-zone settings section -->
+        <section class="settings-section tab-content-panel" id="tab-branding">
+          <div class="section-title">
+            <span class="section-icon">✳</span>
+            <div>
+              <h2>Branding & Logo</h2>
+              <p>Deine Marke im Fokus</p>
+            </div>
+          </div>
+          <label class="form-label" for="brandTitle">Markenname / Titel</label>
+          <input class="form-control" id="brandTitle" value="CFPA TRAINING CLUB" maxlength="50">
+          <label class="form-label mt-3" for="brandSubtitle">Untertitel</label>
+          <input class="form-control" id="brandSubtitle" value="STRENGTH • COMMUNITY • PROGRESS" maxlength="70">
+          <label class="form-label mt-3" for="logoUpload">Eigenes Logo hochladen</label>
+          <input class="form-control file-input" id="logoUpload" type="file" accept="image/*">
+          <div class="logo-actions">
+            <button class="btn btn-soft btn-sm" id="removeLogoBtn" type="button">Logo entfernen</button>
+            <span class="hint-text">PNG / JPG / SVG</span>
+          </div>
+          <div class="row g-3 mt-2">
+            <div class="col-6">
+              <label class="form-label" for="brandColor">Akzentfarbe</label>
+              <input class="form-control color-input" id="brandColor" type="color" value="#c7f36b">
+            </div>
+            <div class="col-6">
+              <label class="form-label" for="fontSize">Schriftgröße</label>
+              <select class="form-select" id="fontSize">
+                <option value="compact">Kompakt</option>
+                <option value="normal" selected>Standard</option>
+                <option value="large">Groß</option>
+              </select>
+            </div>
+          </div>
+          <div class="toggle-row">
+            <div>
+              <strong>Linke Zone anzeigen</strong>
+              <small>Logo und Markentext</small>
+            </div>
+            <label class="switch"><input type="checkbox" id="showLeft" checked><span></span></label></div>
+        </section>
+
+        <!-- Workout information and right-zone settings section -->
+        <section class="settings-section tab-content-panel" id="tab-details">
+          <div class="section-title"><span class="section-icon">▤</span><div><h2>Workout-Infos</h2><p>Kontext für deine Community</p></div></div>
+          <label class="form-label" for="workoutTitle">Workout / WOD</label>
+          <input class="form-control" id="workoutTitle" value="ENGINE ROOM" maxlength="40">
+          <label class="form-label mt-3" for="coachName">Trainername</label>
+          <input class="form-control" id="coachName" value="COACH ALEX" maxlength="40">
+          <label class="form-label mt-3" for="infoText">Hinweis / Zusatzinfo</label>
+          <textarea class="form-control" id="infoText" rows="2" maxlength="100">5 ROUNDS · QUALITY OVER SPEED</textarea>
+          <div class="toggle-row"><div><strong>Live-Uhr anzeigen</strong><small>Lokale Gerätezeit</small></div><label class="switch"><input type="checkbox" id="showClock" checked><span></span></label></div>
+          <div class="toggle-row"><div><strong>Rechte Zone anzeigen</strong><small>Workout und Trainer</small></div><label class="switch"><input type="checkbox" id="showRight" checked><span></span></label></div>
+          <div class="toggle-row"><div><strong>Mittlere Zone anzeigen</strong><small>Timer im Overlay</small></div><label class="switch"><input type="checkbox" id="showCenter" checked><span></span></label></div>
+          <button class="btn btn-soft w-100 mt-3" id="restoreBtn" type="button">↺ Standardlayout wiederherstellen</button>
+        </section>
+
+        <!-- Export and local save actions -->
+        <div class="panel-footer">
+          <button class="btn btn-outline-light w-100" id="saveLayoutBtn" type="button">↓ Layout lokal speichern</button>
+          <p>Deine Einstellungen bleiben in diesem Browser gespeichert.</p>
+        </div>
+      </aside>
+
+      <!-- Preview and overlay output area -->
+      <section class="preview-area">
+        <div class="preview-topbar">
+          <div><p class="eyebrow">LIVE CANVAS</p><h2>Overlay-Vorschau</h2></div>
+          <div class="preview-tools"><span class="preview-status"><i></i> LIVE PREVIEW</span><button class="icon-button" id="fullscreenBtn" type="button" title="Vorschau maximieren" aria-label="Vorschau maximieren">⛶</button></div>
+        </div>
+        <div class="preview-canvas-wrap">
+          <div class="canvas-meta"><span>CANVAS <b>1920 × 1080</b></span><span>TRANSPARENZ <b>SIMULIERT</b></span></div>
+          <!-- This preview simulates the transparent 16:9 browser overlay on a gym image -->
+          <div class="preview-canvas" id="previewCanvas">
+            <div class="gym-background" aria-hidden="true"></div>
+            <div class="preview-vignette" aria-hidden="true"></div>
+            <div class="stream-badge"><span class="live-pulse"></span> LIVE WORKOUT</div>
+            <div class="overlay-layout" id="overlayLayout">
+              <!-- Left overlay zone: logo and editable brand -->
+              <section class="overlay-zone overlay-left" id="overlayLeft">
+                <div class="logo-box" id="logoBox"><img id="uploadedLogo" alt="Hochgeladenes Logo" hidden><span id="defaultLogo">CF<span>+</span></span></div>
+                <div class="brand-lines"><div class="brand-title" id="previewBrandTitle">CFPA TRAINING CLUB</div><div class="brand-subtitle" id="previewBrandSubtitle">STRENGTH • COMMUNITY • PROGRESS</div></div>
+              </section>
+              <!-- Center overlay zone: countdown and round information -->
+              <section class="overlay-zone overlay-center" id="overlayCenter">
+                <div class="timer-kicker"><span class="timer-line"></span> WORKOUT IN PROGRESS <span class="timer-line"></span></div>
+                <div class="preview-timer" id="previewTimer">12:00</div>
+                <div class="timer-bottom"><span class="timer-state" id="timerState">READY TO START</span><span class="round-display" id="previewRound">ROUND 01 / 05</span></div>
+              </section>
+              <!-- Right overlay zone: workout details, coach and live clock -->
+              <section class="overlay-zone overlay-right" id="overlayRight">
+                <div class="wod-label">TODAY'S WORKOUT</div>
+                <div class="wod-title" id="previewWorkoutTitle">ENGINE ROOM</div>
+                <div class="wod-rule"></div>
+                <div class="coach-row"><span class="coach-avatar">A</span><div><small>HEAD COACH</small><strong id="previewCoach">COACH ALEX</strong></div></div>
+                <p class="wod-info" id="previewInfo">5 ROUNDS · QUALITY OVER SPEED</p>
+                <div class="live-clock" id="previewClock">00:00:00</div>
+              </section>
+            </div>
+            <div class="canvas-bottom"><span>CFPA <b>PERFORMANCE SYSTEM</b></span><span>TRAIN HARD. STAY SHARP.</span></div>
+          </div>
+        </div>
+        <div class="preview-caption"><span><i class="caption-dot"></i> Änderungen werden live übernommen</span><span>16:9 · OBS BROWSER SOURCE READY</span></div>
+
+        <!-- Quick workflow cards -->
+        <div class="below-preview">
+          <div class="workflow-card"><div class="workflow-number">01</div><div><strong>Konfigurieren</strong><p>Timer, Branding und WOD-Infos anpassen.</p></div><span>↗</span></div>
+          <div class="workflow-card"><div class="workflow-number">02</div><div><strong>Overlay öffnen</strong><p>Separate transparente Ansicht für OBS starten.</p></div><span>↗</span></div>
+          <div class="workflow-card"><div class="workflow-number">03</div><div><strong>Live gehen</strong><p>Browserquelle hinzufügen und auf 1920 × 1080 setzen.</p></div><span>↗</span></div>
+        </div>
+        <footer class="app-footer"><span>CFPA OVERLAY BUILDER <b>· PROTOTYP</b></span><span>HTML5 / CSS3 / JAVASCRIPT / JQUERY</span></footer>
+      </section>
+    </main>
+
+    <!-- jQuery is used for concise DOM event handling; Bootstrap JS is optional for this prototype -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
